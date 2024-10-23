@@ -118,44 +118,22 @@
 <div class="scrollbar-custom h-full overflow-y-auto py-12 max-sm:pt-8 md:py-24">
 	<div class="pt-42 mx-auto flex flex-col px-5 xl:w-[60rem] 2xl:w-[64rem]">
 		<div class="flex items-center">
-			<h1 class="text-2xl font-bold">Assistants</h1>
-			{#if isHuggingChat}
-				<div class="5 ml-1.5 rounded-lg text-xxs uppercase text-gray-500 dark:text-gray-500">
-					beta
-				</div>
-				<a
-					href="https://huggingface.co/spaces/huggingchat/chat-ui/discussions/357"
-					class="ml-auto dark:text-gray-400 dark:hover:text-gray-300"
-					target="_blank"
-				>
-					<CarbonHelpFilled />
-				</a>
-			{/if}
+			<h1 class="text-2xl font-bold">Teachers</h1>
 		</div>
-		<h3 class="text-gray-500">Popular assistants made by the community</h3>
+		<!-- <h3 class="text-gray-500">Popular assistants made by the community</h3> -->
 		<div class="mt-6 flex justify-between gap-2 max-sm:flex-col sm:items-center">
-			<select
-				class="mt-1 h-[34px] rounded-lg border border-gray-300 bg-gray-50 px-2 text-sm text-gray-900 focus:border-blue-700 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
-				bind:value={data.selectedModel}
-				on:change={onModelChange}
-			>
-				<option value="">All models</option>
-				{#each data.models.filter((model) => !model.unlisted) as model}
-					<option value={model.name}>{model.name}</option>
-				{/each}
-			</select>
 			{#if data.user?.isAdmin}
 				<label class="mr-auto flex items-center gap-1 text-red-500" title="Admin only feature">
 					<input type="checkbox" checked={showUnfeatured} on:change={toggleShowUnfeatured} />
 					Show unfeatured assistants
 				</label>
 			{/if}
-			<a
+			<!-- <a
 				href={`${base}/settings/assistants/new`}
 				class="flex items-center gap-1 whitespace-nowrap rounded-lg border bg-white py-1 pl-1.5 pr-2.5 shadow-sm hover:bg-gray-50 hover:shadow-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-700"
 			>
 				<CarbonAdd />Create new assistant
-			</a>
+			</a> -->
 		</div>
 
 		<div class="mt-7 flex flex-wrap items-center gap-x-2 gap-y-3 text-sm">
@@ -175,17 +153,8 @@
 						/></a
 					>
 				</div>
-				{#if isHuggingChat}
-					<a
-						href="https://hf.co/{assistantsCreator}"
-						target="_blank"
-						class="ml-auto flex items-center text-xs text-gray-500 underline hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
-						><CarbonArrowUpRight class="mr-1 flex-none text-[0.58rem]" target="_blank" />View {assistantsCreator}
-						on HF</a
-					>
-				{/if}
 			{:else}
-				<a
+				<!-- <a
 					href={getHref($page.url, {
 						existingKeys: { behaviour: "delete", keys: ["user", "modelId", "p", "q"] },
 					})}
@@ -196,7 +165,7 @@
 				>
 					<CarbonEarthAmerica class="text-xs" />
 					Community
-				</a>
+				</a> -->
 				{#if data.user?.username}
 					<a
 						href={getHref($page.url, {
@@ -212,7 +181,7 @@
 					</a>
 				{/if}
 			{/if}
-			<div
+			<!-- <div
 				class="relative ml-auto flex h-[30px] w-40 items-center rounded-full border px-2 has-[:focus]:border-gray-400 dark:border-gray-600 sm:w-64"
 			>
 				<CarbonSearch class="pointer-events-none absolute left-2 text-xs text-gray-400" />
@@ -225,15 +194,15 @@
 					maxlength="150"
 					type="search"
 				/>
-			</div>
-			<select
+			</div> -->
+			<!-- <select
 				bind:value={sortValue}
 				on:change={sortAssistants}
 				class="rounded-lg border border-gray-300 bg-gray-50 px-2 py-1 text-sm text-gray-900 focus:border-blue-700 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
 			>
 				<option value={SortKey.TRENDING}>{SortKey.TRENDING}</option>
 				<option value={SortKey.POPULAR}>{SortKey.POPULAR}</option>
-			</select>
+			</select> -->
 		</div>
 
 		<div class="mt-8 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">

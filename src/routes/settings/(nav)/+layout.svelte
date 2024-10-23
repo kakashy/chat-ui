@@ -110,7 +110,7 @@
 					{/if}
 				</a>
 			{/each}
-			{#if !data.loginEnabled || (data.loginEnabled && !!data.user)}
+			<!-- {#if !data.loginEnabled || (data.loginEnabled && !!data.user)}
 				<a
 					href="{base}/settings/assistants/new"
 					class="group flex h-10 flex-none items-center gap-2 pl-3 pr-2 text-sm text-gray-500 hover:bg-gray-100 md:rounded-xl
@@ -119,7 +119,7 @@
 					<CarbonAdd />
 					<div class="truncate">Create new assistant</div>
 				</a>
-			{/if}
+			{/if} -->
 
 			<!-- Other Assistants -->
 			<h4 class="pl-3 pt-3 text-[.7rem] text-gray-600 sm:pl-1">Other Assistants</h4>
