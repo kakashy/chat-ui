@@ -146,24 +146,8 @@
 						<span class="max-sm:hidden"> Share </span>
 					{/if}
 				</button>
-				<a
-					href="{base}/settings/assistants/{assistant._id.toString()}"
-					class="flex h-7 items-center gap-1.5 rounded-full border bg-white px-2.5 py-1 text-gray-800 shadow-sm hover:shadow-inner dark:border-gray-700 dark:bg-gray-700 dark:text-gray-300/90 dark:hover:bg-gray-800 md:text-sm"
-					><IconGear class="text-xxs" />Settings</a
-				>
 			</div>
 		</div>
-		<button
-			on:click={() => {
-				settings.instantSet({
-					activeModel: models[0].name,
-				});
-				goto(`${base}/`);
-			}}
-			class="absolute -bottom-6 right-2 inline-flex items-center justify-center text-xs text-gray-600 underline hover:brightness-50 dark:text-gray-400 dark:hover:brightness-110"
-		>
-			<CarbonRenew class="mr-1.5 text-xxs" /> Reset to default model
-		</button>
 	</div>
 	{#if assistant.exampleInputs}
 		<div class="mx-auto mt-auto w-full gap-8 sm:-mb-8">

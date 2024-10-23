@@ -152,9 +152,8 @@
 
 <svelte:head>
 	<title>{envPublic.PUBLIC_APP_NAME}</title>
-	<meta name="description" content="The first open source alternative to ChatGPT. 💪" />
+	<meta name="description" content="Have insightfull wellness conversations with Magicmind Chat." />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:site" content="@huggingface" />
 
 	<!-- use those meta tags everywhere except on the share assistant page -->
 	<!-- feel free to refacto if there's a better way -->
@@ -174,12 +173,6 @@
 		href="{envPublic.PUBLIC_ORIGIN ||
 			$page.url.origin}{base}/{envPublic.PUBLIC_APP_ASSETS}/favicon.ico"
 		sizes="32x32"
-	/>
-	<link
-		rel="icon"
-		href="{envPublic.PUBLIC_ORIGIN ||
-			$page.url.origin}{base}/{envPublic.PUBLIC_APP_ASSETS}/icon.svg"
-		type="image/svg+xml"
 	/>
 	<link
 		rel="apple-touch-icon"

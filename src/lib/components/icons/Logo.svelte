@@ -8,21 +8,36 @@
 
 {#if envPublic.PUBLIC_APP_ASSETS === "chatui"}
 	<svg
-		height="30"
-		width="30"
-		viewBox="0 0 30 30"
+		fill="currentColor"
+		id="logo"
 		xmlns="http://www.w3.org/2000/svg"
-		class={classNames}
+		class="icon h-8 w-8 flex-none"
+		viewBox="0 0 56.592 36.601"
 	>
 		<path
-			d="M4.06151 14.1464C4.06151 11.8818 4.9611 9.71004 6.56237 8.10877C8.16364 6.5075 10.3354 5.60791 12.6 5.60791H16.5231C18.6254 5.60791 20.6416 6.44307 22.1282 7.92965C23.6148 9.41624 24.45 11.4325 24.45 13.5348C24.45 15.6372 23.6148 17.6534 22.1282 19.14C20.6416 20.6266 18.6254 21.4618 16.5231 21.4618H7.08459L4.63844 23.8387C4.59547 23.8942 4.53557 23.9343 4.4678 23.9527C4.40004 23.9712 4.32811 23.9671 4.2629 23.941C4.1977 23.9149 4.14276 23.8683 4.10643 23.8082C4.07009 23.7481 4.05432 23.6778 4.06151 23.6079V14.1464Z"
-			class="fill-primary-500"
+			id="Trazado_259"
+			data-name="Trazado 259"
+			d="M477.4,370.144a18.3,18.3,0,0,0-.016,30.645,18.3,18.3,0,0,0,.016-30.645Z"
+			transform="translate(-449.098 -367.166)"
+		/>
+		<path
+			id="Trazado_260"
+			data-name="Trazado 260"
+			d="M382.014,374.249a20.335,20.335,0,0,1,11.239-18.233c-.288-.014-.58-.021-.867-.021a18.3,18.3,0,1,0-.019,36.592c.326,0,.661-.009,1-.026A20.314,20.314,0,0,1,382.014,374.249Z"
+			transform="translate(-374.081 -355.995)"
+		/>
+		<path
+			id="Trazado_261"
+			data-name="Trazado 261"
+			d="M569.488,367.226a18.281,18.281,0,0,0-16.852-11.183c-.244,0-.5,0-.759.015a20.429,20.429,0,0,1-.153,36.554c.3.015.6.022.893.022a18.308,18.308,0,0,0,16.871-25.409Z"
+			transform="translate(-514.33 -356.033)"
 		/>
 	</svg>
 {:else}
 	<img
 		class={classNames}
 		alt="{envPublic.PUBLIC_APP_NAME} logo"
-		src="{envPublic.PUBLIC_ORIGIN || $page.url.origin}{base}/{envPublic.PUBLIC_APP_ASSETS}/logo.svg"
+		src="{envPublic.PUBLIC_ORIGIN ||
+			$page.url.origin}{base}/{envPublic.PUBLIC_APP_ASSETS}/favicon.png"
 	/>
 {/if}
