@@ -3,6 +3,7 @@ import { redirect } from "@sveltejs/kit";
 
 export async function load({ parent, params }) {
 	const data = await parent();
+	console.log(data);
 
 	const assistant = data.settings.assistants.find((id) => id === params.assistantId);
 
