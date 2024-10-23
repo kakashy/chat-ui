@@ -34,14 +34,7 @@
 		{#if confirmDelete}
 			<span class="mr-1 font-semibold"> Delete </span>
 		{/if}
-		{#if conv.avatarHash}
-			<img
-				src="{base}/settings/assistants/{conv.assistantId}/avatar.jpg?hash={conv.avatarHash}"
-				alt="Assistant avatar"
-				class="mr-1.5 inline size-4 flex-none rounded-full object-cover"
-			/>
-			{conv.title.replace(/\p{Emoji}/gu, "")}
-		{:else if conv.assistantId}
+		{#if conv.assistantId}
 			<div
 				class="mr-1.5 flex size-4 flex-none items-center justify-center rounded-full bg-gray-300 text-xs font-bold uppercase text-gray-500"
 			/>

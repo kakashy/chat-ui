@@ -91,7 +91,7 @@
 		</button>
 		<form
 			method="POST"
-			action="{base}/settings/assistants/{data.assistant._id}?/subscribe"
+			action="{envPublic.PUBLIC_ORIGIN}{base}/settings/assistants/{data.assistant._id}?/subscribe"
 			class="w-full"
 			use:enhance={() => {
 				return async ({ result }) => {

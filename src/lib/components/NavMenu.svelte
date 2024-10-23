@@ -47,10 +47,7 @@
 </script>
 
 <div class="sticky top-0 flex flex-none items-center justify-between px-3 py-3.5 max-sm:pt-0">
-	<a
-		class="flex items-center gap-2 rounded-xl text-lg font-semibold"
-		href="{envPublic.PUBLIC_ORIGIN}{base}/"
-	>
+	<a class="flex items-center gap-2 rounded-xl text-sm font-semibold" href={base}>
 		<Logo classNames="mr-1" />
 		{envPublic.PUBLIC_APP_NAME}
 	</a>
