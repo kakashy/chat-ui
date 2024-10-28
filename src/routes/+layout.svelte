@@ -170,8 +170,7 @@
 	{/if}
 	<link
 		rel="icon"
-		href="{envPublic.PUBLIC_ORIGIN ||
-			$page.url.origin}{base}/{envPublic.PUBLIC_APP_ASSETS}/favicon.ico"
+		href="{envPublic.PUBLIC_ORIGIN || $page.url.origin}{base}/favicon.png"
 		sizes="32x32"
 	/>
 	<link

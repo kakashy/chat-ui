@@ -3,7 +3,7 @@
 	"name": "Magicmind Chat",
 	"short_name": "Magicmind Chat",
 	"display": "standalone",
-	"start_url": ".",
+	"start_url": "../",
 	"icons": [
 		{
 			"src": "./icon-128x128.png",
