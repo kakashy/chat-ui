@@ -18,7 +18,7 @@ ingress:
   path: "/chat"
   annotations:
     alb.ingress.kubernetes.io/healthcheck-path: "/healthcheck"
-    alb.ingress.kubernetes.io/listen-ports: "[{\"HTTP\": 80}, {\"HTTPS\": 443}]"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
     alb.ingress.kubernetes.io/group.name: "hub-prod"
     alb.ingress.kubernetes.io/scheme: "internet-facing"
     alb.ingress.kubernetes.io/ssl-redirect: "443"
@@ -27,7 +27,7 @@ ingress:
     kubernetes.io/ingress.class: "alb"
 
 envVars:
-  ADDRESS_HEADER: 'X-Forwarded-For'
+  ADDRESS_HEADER: "X-Forwarded-For"
   ALTERNATIVE_REDIRECT_URLS: '["huggingchat://login/callback"]'
   APP_BASE: "/chat"
   ALLOW_IFRAME: "false"
@@ -339,7 +339,7 @@ envVars:
   PUBLIC_APP_ASSETS: "huggingchat"
   PUBLIC_APP_COLOR: "yellow"
   PUBLIC_APP_DESCRIPTION: "Making the community's best AI chat models available to everyone."
-  PUBLIC_APP_DISCLAIMER_MESSAGE: "Disclaimer: AI is an area of active research with known problems such as biased generation and misinformation. Do not use this application for high-stakes decisions or advice."
+  PUBLIC_APP_DISCLAIMER_MESSAGE: "This app is under heavy development and as such, the first message that you send might take longer to generate a response. Don't fret, this only happens once."
   PUBLIC_APP_GUEST_MESSAGE: "You have reached the guest message limit, Sign In with a free Hugging Face account to continue using HuggingChat."
   PUBLIC_APP_DATA_SHARING: 0
   PUBLIC_APP_DISCLAIMER: 1
@@ -357,7 +357,7 @@ envVars:
       }]
     }]
   WEBSEARCH_BLOCKLIST: '["youtube.com", "twitter.com"]'
-  XFF_DEPTH: '2'
+  XFF_DEPTH: "2"
   TOOLS: >
     [
       {
@@ -483,8 +483,8 @@ envVars:
         "outputComponentIdx": 0
       }
     ]
-  HF_ORG_ADMIN: '644171cfbd0c97265298aa99'
-  HF_ORG_EARLY_ACCESS: '5e67bd5b1009063689407478'
+  HF_ORG_ADMIN: "644171cfbd0c97265298aa99"
+  HF_ORG_EARLY_ACCESS: "5e67bd5b1009063689407478"
 
 infisical:
   enabled: true

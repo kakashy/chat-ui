@@ -25,7 +25,8 @@
 		</p>
 
 		<p class="text-sm text-gray-500">
-			{envPublic.PUBLIC_APP_DISCLAIMER_MESSAGE}
+			This app is under heavy development and as such, the first message that you send might take
+			longer to generate a response. Don't fret, this only happens once.
 		</p>
 
 		<div class="flex w-full flex-col items-center gap-2">

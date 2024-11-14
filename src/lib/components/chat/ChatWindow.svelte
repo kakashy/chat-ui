@@ -455,7 +455,7 @@
 			<div
 				class="mt-2 flex justify-between self-stretch px-1 text-xs text-gray-400/90 max-md:mb-2 max-sm:gap-2"
 			>
-				<p>Generated content may be inaccurate or false.</p>
+				<p>The first message might take longer to generate a response.</p>
 				{#if messages.length}
 					<button
 						class="flex flex-none items-center hover:text-gray-400 max-sm:rounded-lg max-sm:bg-gray-50 max-sm:px-2.5 dark:max-sm:bg-gray-800"
