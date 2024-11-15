@@ -37,6 +37,8 @@
 	import { useSettingsStore } from "$lib/stores/settings";
 	import type { ToolFront } from "$lib/types/Tool";
 	import ModelSwitch from "./ModelSwitch.svelte";
+	import { aiAPIState } from "$lib/stores/aiState";
+	import { fly } from "svelte/transition";
 
 	export let messages: Message[] = [];
 	export let loading = false;
@@ -235,6 +237,45 @@
 			}}
 		/>
 	{/if}
+	<aside
+		class="mx-auto my-2 flex w-1/2 max-w-xl items-center justify-center gap-3 rounded-2xl border border-gray-500/50 p-2"
+	>
+		<span class="relative"
+			><img
+				src="https://www.countryandtownhouse.com/wp-content/uploads/2022/05/377329.jpg"
+				alt="Magicmind"
+				class="h-16 w-16 rounded-full object-cover"
+			/>
+			<div
+				class="absolute -right-1 top-12 h-5 w-5 rounded-full border-4 border-[rgb(249,250,251)] bg-red-500 dark:border-[rgb(26,36,50)] {$aiAPIState ==
+				'up'
+					? 'bg-green-500'
+					: $aiAPIState == 'changing'
+					? 'bg-amber-500'
+					: 'bg-red-500'}"
+			/>
+		</span>
+		<span class="flex flex-col">
+			<h2 class="text-center text-xl font-semibold">Wimbot</h2>
+			{#key $aiAPIState}
+				{#if $aiAPIState === "up"}
+					<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">Let's chat</p>
+				{:else if $aiAPIState === "changing"}
+					<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">
+						I'm getting ready. Please allow me 2 - 3 minutes.
+					</p>
+				{:else}
+					<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">
+						I'm asleep right now. Should I wake up?
+					</p>
+					<button
+						class="mx-auto mt-1 w-fit rounded bg-black p-1 text-xs text-white outline-none hover:bg-black/70 dark:bg-white dark:text-black dark:hover:bg-white/70"
+						>Yes, wake up.</button
+					>
+				{/if}
+			{/key}
+		</span>
+	</aside>
 	<div
 		class="scrollbar-custom h-full overflow-y-auto"
 		use:snapScrollToBottom={messages.length ? [...messages] : false}

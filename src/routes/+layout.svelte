@@ -21,6 +21,7 @@
 	import DisclaimerModal from "$lib/components/DisclaimerModal.svelte";
 	import ExpandNavigation from "$lib/components/ExpandNavigation.svelte";
 	import { PUBLIC_APP_DISCLAIMER } from "$env/static/public";
+	import { aiAPIState } from "$lib/stores/aiState";
 
 	export let data;
 
@@ -29,6 +30,8 @@
 
 	let errorToastTimeout: ReturnType<typeof setTimeout>;
 	let currentError: string | null;
+
+	let checkAIState: ReturnType<typeof setInterval>;
 
 	async function onError() {
 		// If a new different error comes, wait for the current error to hide first
@@ -95,6 +98,7 @@
 
 	onDestroy(() => {
 		clearTimeout(errorToastTimeout);
+		clearInterval(checkAIState);
 	});
 
 	$: if ($error) onError();
@@ -143,6 +147,13 @@
 					});
 				});
 		}
+
+		checkAIState = setInterval(async () => {
+			const stateResponse: { state: "down" | "changing" | "up" } = await (
+				await fetch(`${base}/api/ai-state`)
+			).json();
+			$aiAPIState = stateResponse.state;
+		}, 5500);
 	});
 
 	$: mobileNavTitle = ["/models", "/assistants", "/privacy"].includes($page.route.id ?? "")
