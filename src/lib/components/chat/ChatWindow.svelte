@@ -220,6 +220,14 @@
 	];
 
 	$: isFileUploadEnabled = activeMimeTypes.length > 0;
+
+	async function wakeAIup() {
+		$aiAPIState = "changing";
+		const r = await fetch(`${base}/api/ai-state`, {
+			method: "POST",
+			body: JSON.stringify({ state: "changing" }),
+		});
+	}
 </script>
 
 <svelte:window
@@ -246,14 +254,16 @@
 				alt="Magicmind"
 				class="h-16 w-16 rounded-full object-cover"
 			/>
-			<div
-				class="absolute -right-1 top-12 h-5 w-5 rounded-full border-4 border-[rgb(249,250,251)] bg-red-500 dark:border-[rgb(26,36,50)] {$aiAPIState ==
-				'up'
-					? 'bg-green-500'
-					: $aiAPIState == 'changing'
-					? 'bg-amber-500'
-					: 'bg-red-500'}"
-			/>
+			{#key $aiAPIState}
+				<div
+					class="absolute -right-1 top-12 h-5 w-5 rounded-full border-4 border-[rgb(249,250,251)] bg-red-500 dark:border-[rgb(26,36,50)] {$aiAPIState ==
+					'up'
+						? 'bg-green-500'
+						: $aiAPIState == 'changing'
+						? 'bg-amber-500'
+						: 'bg-red-500'}"
+				/>
+			{/key}
 		</span>
 		<span class="flex flex-col">
 			<h2 class="text-center text-xl font-semibold">Wimbot</h2>
@@ -266,11 +276,15 @@
 					</p>
 				{:else}
 					<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">
-						I'm asleep right now. Should I wake up?
+						I'm in deep ice meditation, you wanna chat?
 					</p>
 					<button
+						on:click={async () => {
+							console.log("wtf");
+							await wakeAIup();
+						}}
 						class="mx-auto mt-1 w-fit rounded bg-black p-1 text-xs text-white outline-none hover:bg-black/70 dark:bg-white dark:text-black dark:hover:bg-white/70"
-						>Yes, wake up.</button
+						>Yeah, sure.</button
 					>
 				{/if}
 			{/key}
