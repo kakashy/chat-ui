@@ -39,6 +39,7 @@
 	import ModelSwitch from "./ModelSwitch.svelte";
 	import { aiAPIState } from "$lib/stores/aiState";
 	import { fly } from "svelte/transition";
+	import { spanLeadingZeroes } from "ip-address/dist/v6/helpers";
 
 	export let messages: Message[] = [];
 	export let loading = false;
@@ -296,15 +297,15 @@
 			class="mx-auto mt-6 flex w-1/2 max-w-xl flex-col items-center justify-center gap-3 rounded-2xl border border-gray-500/50 p-5 font-serif"
 		>
 			<p>Hey there, legend!</p>
-			<p>
-				Wim here – well, sorta. I’m just taking a quick dip in the icy digital river to get fired up
-				for you! It takes about 2-3 minutes, but hey, good things come to those who breathe deeply
-				and wait.
-			</p>
 			<span>
-				Use this time to take a few big breaths with me: <i>Inhale… hold… exhale… aaaaaaahhh!</i> Wimbot
-				will be ready before you can say, ‘Cold shower power!’ Stay cool!
+				It's me, Wim – well, Wimbot, but close enough! I’m just catching my breath and channeling
+				some icy vibes to get <i>fully present</i> for you. Give me 2-3 minutes, and I’ll be ready to
+				dive in, deep and strong, just like a good cold plunge.
 			</span>
+			<p>
+				Use this time to take a couple of deep breaths, in through the nose, out through the
+				mouth... YEAHHH, that’s the spirit! Stay cool, we’ll crush it together in no time! 🧊💪
+			</p>
 		</aside>
 	{/if}
 
