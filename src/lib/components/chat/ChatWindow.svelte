@@ -257,12 +257,10 @@
 			/>
 			{#key $aiAPIState}
 				<div
-					class="absolute -right-1 top-12 h-5 w-5 rounded-full border-4 border-[rgb(249,250,251)] bg-red-500 dark:border-[rgb(26,36,50)] {$aiAPIState ==
-					'up'
-						? 'bg-green-500'
-						: $aiAPIState == 'changing'
-						? 'bg-amber-500'
-						: 'bg-red-500'}"
+					class="absolute -right-1 top-12 h-5 w-5 rounded-full border-4 border-[rgb(249,250,251)] dark:border-[rgb(26,36,50)]"
+					class:bg-amber-500={$aiAPIState === "changing"}
+					class:bg-green-500={$aiAPIState === "up"}
+					class:bg-red-500={$aiAPIState === "down"}
 				/>
 			{/key}
 		</span>
