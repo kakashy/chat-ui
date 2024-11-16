@@ -290,110 +290,24 @@
 			{/key}
 		</span>
 	</aside>
-	<div
-		class="scrollbar-custom h-full overflow-y-auto"
-		use:snapScrollToBottom={messages.length ? [...messages] : false}
-		bind:this={chatContainer}
-	>
-		<div
-			class="mx-auto flex h-full max-w-3xl flex-col gap-6 px-5 pt-6 sm:gap-8 xl:max-w-4xl xl:pt-10"
+
+	{#if $aiAPIState === "down"}
+		<aside
+			class="mx-auto mt-6 flex w-1/2 max-w-xl flex-col items-center justify-center gap-3 rounded-2xl border border-gray-500/50 p-5 font-serif"
 		>
-			{#if $page.data?.assistant && !!messages.length}
-				<span
-					class="mx-auto flex items-center gap-1.5 rounded-full border border-gray-100 bg-gray-50 py-1 pl-1 pr-3 text-sm text-gray-800 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
-				>
-					{#if $page.data?.assistant.avatar}
-						<img
-							src="{base}/settings/assistants/{$page.data?.assistant._id.toString()}/avatar.jpg?hash=${$page
-								.data.assistant.avatar}"
-							alt="Avatar"
-							class="size-5 rounded-full object-cover"
-						/>
-					{:else}
-						<div
-							class="flex size-6 items-center justify-center rounded-full bg-gray-300 font-bold uppercase text-gray-500"
-						>
-							{$page.data?.assistant.name[0]}
-						</div>
-					{/if}
+			<p>Hey there, legend!</p>
+			<p>
+				Wim here – well, sorta. I’m just taking a quick dip in the icy digital river to get fired up
+				for you! It takes about 2-3 minutes, but hey, good things come to those who breathe deeply
+				and wait.
+			</p>
+			<span>
+				Use this time to take a few big breaths with me: <i>Inhale… hold… exhale… aaaaaaahhh!</i> Wimbot
+				will be ready before you can say, ‘Cold shower power!’ Stay cool!
+			</span>
+		</aside>
+	{/if}
 
-					{$page.data.assistant.name}
-				</span>
-			{:else if preprompt && preprompt != currentModel.preprompt}
-				<SystemPromptModal preprompt={preprompt ?? ""} />
-			{/if}
-
-			{#if messages.length > 0}
-				<div class="flex h-max flex-col gap-8 pb-52">
-					<ChatMessage
-						{loading}
-						{messages}
-						id={messages[0].id}
-						isAuthor={!shared}
-						readOnly={isReadOnly}
-						model={currentModel}
-						on:retry
-						on:vote
-						on:continue
-					/>
-					{#if isReadOnly}
-						<ModelSwitch {models} {currentModel} />
-					{/if}
-				</div>
-			{:else if pending}
-				<ChatMessage
-					loading={true}
-					messages={[
-						{
-							id: "0-0-0-0-0",
-							content: "",
-							from: "assistant",
-							children: [],
-						},
-					]}
-					id={"0-0-0-0-0"}
-					isAuthor={!shared}
-					readOnly={isReadOnly}
-					model={currentModel}
-				/>
-			{:else if !assistant}
-				<ChatIntroduction
-					{currentModel}
-					on:message={(ev) => {
-						if ($page.data.loginRequired) {
-							ev.preventDefault();
-							loginModalOpen = true;
-						} else {
-							dispatch("message", ev.detail);
-						}
-					}}
-				/>
-			{:else}
-				<AssistantIntroduction
-					{models}
-					{assistant}
-					on:message={(ev) => {
-						if ($page.data.loginRequired) {
-							ev.preventDefault();
-							loginModalOpen = true;
-						} else {
-							dispatch("message", ev.detail);
-						}
-					}}
-				/>
-			{/if}
-		</div>
-
-		<ScrollToPreviousBtn
-			class="fixed right-4 max-md:bottom-[calc(50%+26px)] md:bottom-48 lg:right-10"
-			scrollNode={chatContainer}
-		/>
-
-		<ScrollToBottomBtn
-			class="fixed right-4 max-md:bottom-[calc(50%-26px)] md:bottom-36 lg:right-10"
-			scrollNode={chatContainer}
-		/>
-	</div>
 	<div
 		class="dark:via-gray-80 pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto flex w-full max-w-3xl flex-col items-center justify-center bg-gradient-to-t from-white via-white/80 to-white/0 px-3.5 py-4 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900/0 max-md:border-t max-md:bg-white max-md:dark:bg-gray-900 sm:px-5 md:py-8 xl:max-w-4xl [&>*]:pointer-events-auto"
 	>
