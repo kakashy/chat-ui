@@ -238,6 +238,10 @@
 	on:drop|preventDefault={() => (onDrag = false)}
 />
 
+{#if preprompt && preprompt != currentModel.preprompt}
+	<SystemPromptModal preprompt={preprompt ?? ""} />
+{/if}
+
 <div class="relative min-h-0 min-w-0">
 	{#if loginModalOpen}
 		<LoginModal
@@ -246,66 +250,179 @@
 			}}
 		/>
 	{/if}
-	<aside
-		class="mx-auto my-2 flex w-1/2 max-w-xl items-center justify-center gap-3 rounded-2xl border border-gray-500/50 p-2"
-	>
-		<span class="relative"
-			><img
-				src="https://www.countryandtownhouse.com/wp-content/uploads/2022/05/377329.jpg"
-				alt="Magicmind"
-				class="h-16 w-16 rounded-full object-cover"
-			/>
-			{#key $aiAPIState}
-				<div
-					class="absolute -right-1 top-12 h-5 w-5 rounded-full border-4 border-[rgb(249,250,251)] dark:border-[rgb(26,36,50)]"
-					class:bg-amber-500={$aiAPIState === "changing"}
-					class:bg-green-500={$aiAPIState === "up"}
-					class:bg-red-500={$aiAPIState === "down"}
-				/>
-			{/key}
-		</span>
-		<span class="flex flex-col">
-			<h2 class="text-center text-xl font-semibold">Wimbot</h2>
-			{#key $aiAPIState}
-				{#if $aiAPIState === "up"}
-					<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">Let's chat</p>
-				{:else if $aiAPIState === "changing"}
-					<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">
-						I'm getting ready. Please allow me 2 - 3 minutes.
-					</p>
-				{:else}
-					<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">
-						I'm in deep ice meditation, you wanna chat?
-					</p>
-					<button
-						on:click={async () => {
-							console.log("wtf");
-							await wakeAIup();
-						}}
-						class="mx-auto mt-1 w-fit rounded bg-black p-1 text-xs text-white outline-none hover:bg-black/70 dark:bg-white dark:text-black dark:hover:bg-white/70"
-						>Yeah, sure.</button
-					>
-				{/if}
-			{/key}
-		</span>
-	</aside>
-
-	{#if $aiAPIState === "down"}
+	{#if $aiAPIState === "up"}
 		<aside
-			class="mx-auto mt-6 flex w-1/2 max-w-xl flex-col items-center justify-center gap-3 rounded-2xl border border-gray-500/50 p-5 font-serif"
+			in:fly={{ duration: 300, delay: 200, y: 10 }}
+			class="mx-auto my-2 flex w-1/2 max-w-xl items-center justify-center gap-3 rounded-2xl border border-gray-200 p-2 shadow-xl dark:border-gray-500/50"
 		>
-			<p>Hey there, legend!</p>
-			<span>
-				It's me, Wim – well, Wimbot, but close enough! I’m just catching my breath and channeling
-				some icy vibes to get <i>fully present</i> for you. Give me 2-3 minutes, and I’ll be ready to
-				dive in, deep and strong, just like a good cold plunge.
+			<span class="relative"
+				><img
+					src="https://www.countryandtownhouse.com/wp-content/uploads/2022/05/377329.jpg"
+					alt="Magicmind"
+					class="h-16 w-16 rounded-full object-cover"
+				/>
+				{#key $aiAPIState}
+					<div
+						class="absolute -right-1 top-12 h-5 w-5 rounded-full border-4 border-[rgb(249,250,251)] dark:border-[rgb(26,36,50)]"
+						class:bg-green-500={$aiAPIState === "up"}
+					/>
+				{/key}
 			</span>
-			<p>
-				Use this time to take a couple of deep breaths, in through the nose, out through the
-				mouth... YEAHHH, that’s the spirit! Stay cool, we’ll crush it together in no time! 🧊💪
-			</p>
+			<span class="flex flex-col">
+				<h2 class="text-center text-xl font-semibold">Wimbot</h2>
+				{#key $aiAPIState}
+					{#if $aiAPIState === "up"}
+						<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">Let's chat</p>
+					{:else if $aiAPIState === "changing"}
+						<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">
+							I'm getting ready. Please allow me 2 - 3 minutes.
+						</p>
+					{:else}
+						<p in:fly={{ duration: 300, y: 10 }} class="text-xs opacity-70">
+							I'm in deep ice meditation, you wanna chat?
+						</p>
+						<button
+							on:click={async () => {
+								console.log("wtf");
+								await wakeAIup();
+							}}
+							class="mx-auto mt-1 w-fit rounded bg-black p-1 text-xs text-white outline-none hover:bg-black/70 dark:bg-white dark:text-black dark:hover:bg-white/70"
+							>Yeah, sure.</button
+						>
+					{/if}
+				{/key}
+			</span>
 		</aside>
 	{/if}
+
+	{#if $aiAPIState !== "up"}
+		<aside
+			class=" relative mx-auto mt-6 flex w-1/2 max-w-xl flex-col items-center justify-center gap-3 rounded-3xl border border-gray-500/50 p-5 font-serif text-xs md:text-base"
+		>
+			<span class="flex items-center gap-2 sm:gap-4">
+				<span class="relative"
+					><img
+						src="https://www.countryandtownhouse.com/wp-content/uploads/2022/05/377329.jpg"
+						alt="Magicmind"
+						class="h-16 w-16 rounded-full object-cover"
+					/>
+					{#key $aiAPIState}
+						<div
+							class="absolute -right-1 top-12 h-5 w-5 rounded-full border-4 border-[rgb(249,250,251)] dark:border-[rgb(26,36,50)]"
+							class:bg-amber-500={$aiAPIState === "changing"}
+							class:bg-red-500={$aiAPIState === "down"}
+						/>
+					{/key}
+				</span>
+				<h2 class="font-sans text-lg font-semibold md:text-5xl">Wimbot</h2>
+			</span>
+
+			{#if $aiAPIState === "down"}
+				<p>Hey there, legend!</p>
+				<span>
+					It's me, Wim – well, Wimbot, but close enough! I’m just catching my breath and channeling
+					some icy vibes to get <i>fully present</i> for you. Give me 2-3 minutes, and I’ll be ready
+					to dive in, deep and strong, just like a good cold plunge.
+				</span>
+				<p in:fly={{ duration: 300, delay: 200, y: 10 }}>
+					I'm in deep ice meditation, you wanna chat?
+				</p>
+				<button
+					on:click={async () => {
+						console.log("wtf");
+						await wakeAIup();
+					}}
+					class="mx-auto mt-1 w-fit rounded bg-black p-1 text-xs text-white outline-none hover:bg-black/70 dark:bg-white dark:text-black dark:hover:bg-white/70"
+					>Yeah, sure.</button
+				>
+				<p>
+					Use this time to take a couple of deep breaths, in through the nose, out through the
+					mouth... YEAHHH, that’s the spirit! Stay cool, we’ll crush it together in no time! 🧊💪
+				</p>
+			{:else}
+				<p in:fly={{ duration: 300, y: 10 }} class="text-base">Getting ready</p>
+			{/if}
+		</aside>
+	{/if}
+
+	<div
+		class="scrollbar-custom h-full overflow-y-auto"
+		use:snapScrollToBottom={messages.length ? [...messages] : false}
+		bind:this={chatContainer}
+	>
+		<div
+			class="mx-auto flex h-full max-w-3xl flex-col gap-6 px-5 pt-6 sm:gap-8 xl:max-w-4xl xl:pt-10"
+		>
+			{#if messages.length > 0}
+				<div class="flex h-max flex-col gap-8 pb-52">
+					<ChatMessage
+						{loading}
+						{messages}
+						id={messages[0].id}
+						isAuthor={!shared}
+						readOnly={isReadOnly}
+						model={currentModel}
+						on:retry
+						on:vote
+						on:continue
+					/>
+					{#if isReadOnly}
+						<ModelSwitch {models} {currentModel} />
+					{/if}
+				</div>
+			{:else if pending}
+				<ChatMessage
+					loading={true}
+					messages={[
+						{
+							id: "0-0-0-0-0",
+							content: "",
+							from: "assistant",
+							children: [],
+						},
+					]}
+					id={"0-0-0-0-0"}
+					isAuthor={!shared}
+					readOnly={isReadOnly}
+					model={currentModel}
+				/>
+			{:else if !assistant}
+				<ChatIntroduction
+					{currentModel}
+					on:message={(ev) => {
+						if ($page.data.loginRequired) {
+							ev.preventDefault();
+							loginModalOpen = true;
+						} else {
+							dispatch("message", ev.detail);
+						}
+					}}
+				/>
+			{:else}
+				<AssistantIntroduction
+					{models}
+					{assistant}
+					on:message={(ev) => {
+						if ($page.data.loginRequired) {
+							ev.preventDefault();
+							loginModalOpen = true;
+						} else {
+							dispatch("message", ev.detail);
+						}
+					}}
+				/>
+			{/if}
+		</div>
+		<ScrollToPreviousBtn
+			class="fixed right-4 max-md:bottom-[calc(50%+26px)] md:bottom-48 lg:right-10"
+			scrollNode={chatContainer}
+		/>
+
+		<ScrollToBottomBtn
+			class="fixed right-4 max-md:bottom-[calc(50%-26px)] md:bottom-36 lg:right-10"
+			scrollNode={chatContainer}
+		/>
+	</div>
 
 	<div
 		class="dark:via-gray-80 pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto flex w-full max-w-3xl flex-col items-center justify-center bg-gradient-to-t from-white via-white/80 to-white/0 px-3.5 py-4 dark:border-gray-800 dark:from-gray-900 dark:to-gray-900/0 max-md:border-t max-md:bg-white max-md:dark:bg-gray-900 sm:px-5 md:py-8 xl:max-w-4xl [&>*]:pointer-events-auto"
@@ -423,7 +540,7 @@
 			<div
 				class="mt-2 flex justify-between self-stretch px-1 text-xs text-gray-400/90 max-md:mb-2 max-sm:gap-2"
 			>
-				<p>The first message might take longer to generate a response.</p>
+				<p>The first message might take a bit longer to respond.</p>
 				{#if messages.length}
 					<button
 						class="flex flex-none items-center hover:text-gray-400 max-sm:rounded-lg max-sm:bg-gray-50 max-sm:px-2.5 dark:max-sm:bg-gray-800"
